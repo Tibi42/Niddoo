@@ -382,7 +382,7 @@ function RealisationBandeau({ folder, count, index }) {
                 color: "#fff",
                 backgroundColor: "rgba(128, 124, 115, 0.8)",
 
-                fontSize: isMobile ? 14 : 16,
+                fontSize: isMobile ? 16 : 16,
                 textTransform: "none",
               }}
               dangerouslySetInnerHTML={{ __html: titreHtml }}

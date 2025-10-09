@@ -63,6 +63,31 @@ h6 {
   text-transform: none;
 }
 
+/* Réduire la taille des titres h1 dans les réalisations */
+#realisations-container h1 {
+  font-size: 2.3rem;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+/* Décalage des bullet points vers la gauche dans les réalisations */
+#realisations-container ul {
+  padding-left: 15px;
+  margin: 0;
+}
+
+#realisations-container li {
+  padding-left: 0;
+  margin: 0;
+}
+
+#realisations-container h2 {
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
 /* Pour les éléments avec font-variant-caps: small-caps */
 [style*="font-variant-caps: small-caps"],
 [style*="fontVariantCaps"] {
@@ -362,6 +387,25 @@ body,
 
 /* Ajustements smartphone <700px */
 @media (max-width: 700px) {
+  /* Réduction et alignement des h1 et h2 de la section réalisations sur smartphone */
+  #realisations-container h1,
+  #realisations-container table h1,
+  #realisations-container tbody h1,
+  #realisations-container td h1 {
+    font-size: 0.9rem !important;
+    line-height: 1.2 !important;
+    padding-left: 15px !important;
+  }
+
+  #realisations-container h2,
+  #realisations-container table h2,
+  #realisations-container tbody h2,
+  #realisations-container td h2 {
+    font-size: 0.8rem !important;
+    line-height: 1.2 !important;
+    padding-left: 15px !important;
+  }
+
   #activites {
     gap: 12px !important;
     padding-left: 12px;

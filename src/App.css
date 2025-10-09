@@ -1,0 +1,517 @@
+* {
+  font-family: "TT Interphases Pro", "Inter", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Aucune bordure sur les images par défaut */
+img {
+  border: none !important;
+  max-width: 100%;
+  height: auto;
+}
+
+video,
+iframe,
+canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Retirer toutes les bordures par défaut sur les éléments courants */
+table,
+td,
+th,
+div,
+section,
+header,
+footer,
+article,
+aside,
+nav {
+  border: none !important;
+}
+
+/* Retirer les bordures des inputs et boutons par défaut (si présents) */
+input,
+textarea,
+select,
+button {
+  border: none;
+  outline: none;
+}
+
+/* Appliquer TT Firs Neue aux en-têtes et textes en majuscule */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "TT Firs Neue", "Barlow", system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+
+/* Annuler le uppercase pour les titres des réalisations */
+#realisations-container h2,
+#realisations-container h3 {
+  text-transform: none;
+}
+
+/* Pour les éléments avec font-variant-caps: small-caps */
+[style*="font-variant-caps: small-caps"],
+[style*="fontVariantCaps"] {
+  font-family: "TT Firs Neue", "Barlow", system-ui, sans-serif !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f5f2ed;
+  color: #2c2c2c;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  overflow-wrap: anywhere; /* évite les débordements de mots longs */
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow-x: hidden; /* empêche tout débordement horizontal */
+}
+
+#root {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f2ed;
+  background-image: url("/assets/images/plans_architectes.jpg");
+  background-size: auto;
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Header */
+.app-header {
+  background: #5c5c5c;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-radius: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.app-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+.app-header__brand {
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.app-header__nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.app-header__link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+}
+
+.app-header__link:hover {
+  color: #f5f2ed;
+}
+
+/* Layout principal avec colonnes */
+.main-container {
+  display: block;
+  height: 100vh;
+  overflow: visible;
+}
+
+.left-column {
+  background-color: #807c73;
+  color: white;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 25%;
+  z-index: 1;
+}
+
+.right-column {
+  background-image: url("/assets/images/plans_architectes.jpg");
+  background-size: auto;
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  color: #2c2c2c;
+  padding: 40px 70px 40px 80px;
+  min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-left: 25%;
+  width: 75%;
+  position: relative;
+  z-index: 0;
+}
+
+.right-column::before {
+  content: "";
+  position: fixed;
+  left: 25%;
+  top: 0;
+  width: 60px;
+  height: 100vh;
+  background-image: url("/assets/images/plans_architectes.jpg");
+  background-size: auto;
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Sections activités responsive */
+.activity-section {
+  /* 3 colonnes égales sur desktop, avec gap total 40px (2 x 20px) */
+  flex: 0 1 calc((100% - 40px) / 3);
+  min-width: calc((100% - 40px) / 3);
+  max-width: calc((100% - 40px) / 3);
+  margin-bottom: 20px;
+  display: flex; /* pour que la carte puisse s'étirer */
+}
+
+.activity-section > div {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%; /* étire la carte à la même hauteur */
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* assure que la carte prend toute la largeur */
+}
+
+.activity-section > div:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Arrondir les angles des tables principales */
+#entete,
+#pied {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Arrondir les angles du conteneur de réalisations */
+#realisations-container > div {
+  border-radius: 20px;
+}
+
+/* Styles pour les cartes modernes */
+.modern-card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Footer caché sur desktop, affiché sur mobile */
+.footer-card {
+  display: none;
+}
+
+.modern-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Typographie moderne */
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+  color: #2c2c2c;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #5c5c5c;
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  /* Masquer les bordures décoratives sur mobile */
+  .right-column::before,
+  .right-column::after {
+    display: none;
+  }
+
+  .main-container {
+    grid-template-columns: 1fr;
+    height: auto; /* autorise la hauteur naturelle */
+    overflow: visible; /* permet le scroll si contenu > écran */
+  }
+
+  .left-column {
+    position: static;
+    width: 100%;
+    padding: 20px;
+    height: auto; /* laisse les cartes s'étendre naturellement */
+    overflow: visible; /* évite le masquage sur mobile */
+  }
+
+  .right-column {
+    padding: 20px;
+    height: auto; /* laisse les cartes s'étendre naturellement */
+    overflow: visible; /* évite le masquage sur mobile */
+    margin-left: 0;
+    width: 100%;
+  }
+
+  #root {
+    max-width: 100%;
+  }
+
+  .activity-section {
+    flex: 1 1 100%;
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+    display: block; /* comportement naturel en pile sur mobile */
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+/* Ajustements smartphone <700px */
+@media (max-width: 700px) {
+  #activites {
+    gap: 12px !important;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* Footer responsive */
+  #pied {
+    width: 100% !important;
+    border: none !important;
+    font-size: 0.95rem;
+  }
+  #pied table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  #pied td,
+  #pied th {
+    padding: 6px 8px;
+    word-break: break-word;
+    vertical-align: middle;
+    text-align: left;
+  }
+  #pied img {
+    width: 24px !important;
+    height: auto;
+    vertical-align: middle;
+  }
+  #pied #niddoo_titre2 {
+    font-size: 1.2rem !important;
+    background: white !important;
+    color: #2c2c2c !important;
+  }
+
+  /* Footer card (div-based) styles when present */
+  .footer-card {
+    padding: 20px;
+    display: flex; /* Affiché sur mobile */
+    flex-direction: column;
+    gap: 8px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  .footer-card__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    margin-bottom: 8px;
+    padding-bottom: 0px;
+    border-bottom: none;
+  }
+  .footer-card__header h2 {
+    font-size: 1.4rem;
+    color: #2c2c2c;
+    margin: 0;
+    font-weight: bold;
+  }
+  .footer-card__tag {
+    background: #5c5c5c;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    align-self: flex-end;
+  }
+  .footer-card__row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1rem;
+    color: #2c2c2c;
+    margin-bottom: 5px;
+  }
+  .footer-card__row img {
+    width: 24px;
+    height: auto;
+    flex-shrink: 0;
+  }
+  .footer-card__row a {
+    color: #2c2c2c;
+    text-decoration: none;
+  }
+  .footer-card__row a:hover {
+    text-decoration: underline;
+  }
+  .footer-card__legal {
+    font-size: 0.9rem;
+    color: #5c5c5c;
+    line-height: 1.5;
+    margin-top: 8px;
+    padding-top: 0px;
+    border-top: none;
+  }
+
+  .activity-section {
+    flex: 1 1 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .activity-section > div {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .modern-card {
+    padding: 18px;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Optimisations smartphone (<=480px) */
+@media (max-width: 480px) {
+  .left-column,
+  .right-column {
+    padding: 14px;
+  }
+
+  .modern-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+  h2 {
+    font-size: 1.1rem;
+  }
+  h3 {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 1.2rem;
+  }
+
+  .app-header {
+    margin: 10px;
+  }
+}

@@ -173,14 +173,15 @@ function RealisationBandeau({ folder, count, index }) {
   }
 
   if (zoomMode) {
-    // Mode zoom - affichage plein écran
+    // Mode zoom - affichage centré sur la colonne de droite
     return (
       <div
         style={{
           position: "fixed",
           top: 0,
-          left: 0,
-          width: "100vw",
+          left: isMobile ? 0 : "30%",
+          right: isMobile ? 0 : "2.5%",
+          width: isMobile ? "100vw" : "auto",
           height: "100vh",
           backgroundColor: "rgba(0, 0, 0, 0.9)",
           zIndex: 1000,
@@ -192,7 +193,11 @@ function RealisationBandeau({ folder, count, index }) {
         onClick={closeZoom}
       >
         <div
-          style={{ position: "relative", maxWidth: "90vw", maxHeight: "90vh" }}
+          style={{
+            position: "relative",
+            maxWidth: isMobile ? "90vw" : "90%",
+            maxHeight: "90vh",
+          }}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Image principale */}

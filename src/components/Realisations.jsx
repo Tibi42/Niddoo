@@ -59,7 +59,13 @@ function useRealisations() {
   return realisations;
 }
 
-function RealisationBandeau({ folder, count, index }) {
+function RealisationBandeau({
+  folder,
+  count,
+  index,
+  activeZoom,
+  setActiveZoom,
+}) {
   const [position, setPosition] = useState(1);
   const [ratioAv, setRatioAv] = useState({});
   const [titreHtml, setTitreHtml] = useState("");
@@ -68,9 +74,9 @@ function RealisationBandeau({ folder, count, index }) {
   const containerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
 
-  // États pour le zoom et la mosaïque
-  const [zoomMode, setZoomMode] = useState(false);
+  // États pour la mosaïque
   const [showAp, setShowAp] = useState(true);
+  const zoomMode = activeZoom === folder;
 
   useEffect(() => {
     fetch(`/assets/images/realisation_${folder}/titre.html`).then(async (r) => {
@@ -86,6 +92,13 @@ function RealisationBandeau({ folder, count, index }) {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Nettoyage du scroll lors du démontage du composant
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, []);
 
   useEffect(() => {
@@ -150,12 +163,16 @@ function RealisationBandeau({ folder, count, index }) {
 
   // Fonctions de zoom adaptées du JavaScript original
   function openZoom() {
-    setZoomMode(true);
+    setActiveZoom(folder);
     setShowAp(true);
+    // Désactiver le scroll du body en mode zoom
+    document.body.style.overflow = "hidden";
   }
 
   function closeZoom() {
-    setZoomMode(false);
+    setActiveZoom(null);
+    // Réactiver le scroll du body
+    document.body.style.overflow = "auto";
   }
 
   function switchApAv() {
@@ -195,8 +212,11 @@ function RealisationBandeau({ folder, count, index }) {
         <div
           style={{
             position: "relative",
-            maxWidth: isMobile ? "90vw" : "90%",
-            maxHeight: "90vh",
+            maxWidth: isMobile ? "100vw" : "90%",
+            maxHeight: isMobile ? "100vh" : "90vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
           onClick={(e) => e.stopPropagation()}
         >
@@ -206,9 +226,13 @@ function RealisationBandeau({ folder, count, index }) {
               showAp ? "Ap" : "Av"
             }_${jj}.jpg`}
             style={{
-              maxWidth: "100%",
-              maxHeight: "80vh",
+              maxWidth: isMobile ? "100vw" : "100%",
+              maxHeight: isMobile ? "100vh" : "80vh",
+              width: "auto",
+              height: "auto",
               cursor: hasAv ? "pointer" : "auto",
+              objectFit: "contain",
+              display: "block",
             }}
             alt={`${showAp ? "Après" : "Avant"} ${index}-${jj}`}
             onClick={(e) => {
@@ -455,10 +479,22 @@ function RealisationBandeau({ folder, count, index }) {
                   style={{
                     position: "relative",
                     cursor: "pointer",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
                     flexShrink: 0,
                     borderRadius: "20px",
                     overflow: "hidden",
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform =
+                      "translateY(-8px) scale(1.03)";
+                    e.currentTarget.style.boxShadow =
+                      "0 12px 24px rgba(0,0,0,0.3)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0) scale(1)";
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 12px rgba(0,0,0,0.2)";
                   }}
                   onClick={() => {
                     setPosition(photoNum);
@@ -572,6 +608,8 @@ function RealisationBandeau({ folder, count, index }) {
 
 export default function Realisations() {
   const realisations = useRealisations();
+  const [activeZoom, setActiveZoom] = useState(null);
+
   if (realisations.length === 0) return null;
   return (
     <div id="realisations-container">
@@ -581,6 +619,8 @@ export default function Realisations() {
           folder={folder}
           count={count}
           index={index}
+          activeZoom={activeZoom}
+          setActiveZoom={setActiveZoom}
         />
       ))}
     </div>

@@ -14,7 +14,7 @@ function Maitrise() {
         }}
       >
         MAITRISE
-        <br />
+        
         D'OEUVRE
       </h2>
       <ul>

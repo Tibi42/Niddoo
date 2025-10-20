@@ -299,6 +299,7 @@ body,
 /* Arrondir les angles du conteneur de réalisations */
 #realisations-container > div {
   border-radius: 20px;
+  border: 5px solid #807c73 !important;
 }
 
 /* Styles pour les cartes modernes */

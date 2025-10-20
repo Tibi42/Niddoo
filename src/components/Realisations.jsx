@@ -401,6 +401,7 @@ function RealisationBandeau({
       <table
         style={{
           width: "100%",
+          backgroundColor: "#807c73"
         }}
       >
         <tbody>
@@ -409,8 +410,9 @@ function RealisationBandeau({
               style={{
                 width: "100%",
                 color: "#fff",
-                backgroundColor: "rgba(128, 124, 115, 0.8)",
-
+                backgroundColor: "#807c73",
+                // padding: "-15px",
+                // margin: "-15px",
                 fontSize: isMobile ? 16 : 16,
                 textTransform: "none",
               }}

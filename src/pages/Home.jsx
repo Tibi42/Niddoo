@@ -44,6 +44,7 @@ function Home() {
               fontSize: "3.5rem",
               marginBottom: "1rem",
               color: "#2C2C2C",
+              whiteSpace: "nowrap",
             }}
           >
             NIDDOO SAS
@@ -56,7 +57,7 @@ function Home() {
               fontWeight: "400",
             }}
           >
-            Construction Eco-responsable
+            Construction / Rénovation <br/> Eco-responsable
           </h2>
 
           <div style={{ marginBottom: "2rem" }}>
@@ -159,8 +160,7 @@ function Home() {
               textAlign: "justify",
             }}
           >
-            Bienvenue chez Niddoo, votre partenaire de confiance pour la
-            construction et la transformation immobilière. Spécialistes de la
+            Bienvenue chez Niddoo, <br/> Spécialistes de la
             rénovation éco-responsable, nous offrons une expertise complète avec
             maîtrise d'œuvre, plans d'architecte, garanties constructions et une
             assistance à la vente. Avec Niddoo, transformez votre espace en un
@@ -230,7 +230,7 @@ function Home() {
                     color: "white",
                   }}
                 >
-                  • Rénovation de 2 salles de bains
+                  • Rénovation partiellle
                 </li>
                 <li
                   style={{
@@ -240,6 +240,15 @@ function Home() {
                   }}
                 >
                   • Surélévation
+                </li>
+                <li
+                  style={{
+                    marginBottom: "6px",
+                    fontSize: "1.15rem",
+                    color: "white",
+                  }}
+                >
+                  • Extention
                 </li>
               </ul>
             </div>
@@ -267,8 +276,7 @@ function Home() {
                   color: "#2C2C2C",
                   textTransform: "uppercase",
                   letterSpacing: "0.05em",
-                  whiteSpace: "nowrap",
-                }}
+              }}
               >
                 MAITRISE D'OEUVRE
               </h2>
@@ -435,7 +443,7 @@ function Home() {
                   marginBottom: "0",
                 }}
               >
-                Construction Eco-responsable
+                Construction / Rénovation Eco-responsable
               </div>
             </div>
           </div>

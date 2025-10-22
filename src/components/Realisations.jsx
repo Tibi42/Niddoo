@@ -76,6 +76,7 @@ function RealisationBandeau({
 
   // États pour la mosaïque
   const [showAp, setShowAp] = useState(true);
+  const [showControls, setShowControls] = useState(true);
   const zoomMode = activeZoom === folder;
 
   useEffect(() => {
@@ -165,6 +166,7 @@ function RealisationBandeau({
   function openZoom() {
     setActiveZoom(folder);
     setShowAp(true);
+    setShowControls(true);
     // Désactiver le scroll du body en mode zoom
     document.body.style.overflow = "hidden";
   }
@@ -236,15 +238,13 @@ function RealisationBandeau({
             }}
             alt={`${showAp ? "Après" : "Avant"} ${index}-${jj}`}
             onClick={(e) => {
-              if (hasAv) {
-                e.stopPropagation();
-                switchApAv();
-              }
+              e.stopPropagation();
+              setShowControls((prev) => !prev);
             }}
           />
 
           {/* Image secondaire (avant/après) */}
-          {hasAv && (
+          {showControls && hasAv && (
             <img
               src={`/assets/images/realisation_${folder}/${
                 showAp ? "Av" : "Ap"
@@ -266,25 +266,27 @@ function RealisationBandeau({
           )}
 
           {/* Boutons de contrôle */}
-          <IconButton
-            onClick={closeZoom}
-            sx={{
-              position: "absolute",
-              top: 10,
-              left: 10,
-              backgroundColor: "rgba(255, 0, 0, 0.8)",
-              color: "white",
-              "&:hover": {
-                backgroundColor: "rgba(255, 0, 0, 1)",
-              },
-              width: 45,
-              height: 45,
-            }}
-          >
-            <span style={{ fontSize: "24px", fontWeight: "bold" }}>✕</span>
-          </IconButton>
+          {showControls && (
+            <IconButton
+              onClick={closeZoom}
+              sx={{
+                position: "absolute",
+                top: 10,
+                left: 10,
+                backgroundColor: "rgba(255, 0, 0, 0.8)",
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "rgba(255, 0, 0, 1)",
+                },
+                width: 45,
+                height: 45,
+              }}
+            >
+              <span style={{ fontSize: "24px", fontWeight: "bold" }}>✕</span>
+            </IconButton>
+          )}
 
-          {hasAv && (
+          {showControls && hasAv && (
             <IconButton
               onClick={switchApAv}
               sx={{
@@ -304,82 +306,90 @@ function RealisationBandeau({
             </IconButton>
           )}
 
-          <IconButton
-            onClick={zoomPrev}
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: 20,
-              transform: "translateY(-50%)",
-              backgroundColor: "rgba(74, 101, 129, 0.8)",
-              color: "white",
-              "&:hover": {
-                backgroundColor: "rgba(74, 101, 129, 1)",
-              },
-              width: 50,
-              height: 50,
-            }}
-          >
-            <span style={{ fontSize: "28px", fontWeight: "bold" }}>‹</span>
-          </IconButton>
+          {showControls && (
+            <IconButton
+              onClick={zoomPrev}
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: 20,
+                transform: "translateY(-50%)",
+                backgroundColor: "rgba(74, 101, 129, 0.8)",
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "rgba(74, 101, 129, 1)",
+                },
+                width: 50,
+                height: 50,
+              }}
+            >
+              <span style={{ fontSize: "28px", fontWeight: "bold" }}>‹</span>
+            </IconButton>
+          )}
 
-          <IconButton
-            onClick={zoomNext}
-            sx={{
-              position: "absolute",
-              top: "50%",
-              right: 20,
-              transform: "translateY(-50%)",
-              backgroundColor: "rgba(74, 101, 129, 0.8)",
-              color: "white",
-              "&:hover": {
-                backgroundColor: "rgba(74, 101, 129, 1)",
-              },
-              width: 50,
-              height: 50,
-            }}
-          >
-            <span style={{ fontSize: "28px", fontWeight: "bold" }}>›</span>
-          </IconButton>
+          {showControls && (
+            <IconButton
+              onClick={zoomNext}
+              sx={{
+                position: "absolute",
+                top: "50%",
+                right: 20,
+                transform: "translateY(-50%)",
+                backgroundColor: "rgba(74, 101, 129, 0.8)",
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "rgba(74, 101, 129, 1)",
+                },
+                width: 50,
+                height: 50,
+              }}
+            >
+              <span style={{ fontSize: "28px", fontWeight: "bold" }}>›</span>
+            </IconButton>
+          )}
 
           {/* Badges Après/Avant */}
-          <Chip
-            label="APRÈS"
-            onClick={() => setShowAp(true)}
-            sx={{
-              position: "absolute",
-              top: 10,
-              right: 10,
-              backgroundColor: showAp
-                ? "rgba(74, 101, 129, 1)"
-                : "rgba(74, 101, 129, 0.6)",
-              color: "white",
-              fontWeight: "bold",
-              cursor: "pointer",
-              "&:hover": {
-                backgroundColor: "rgba(74, 101, 129, 1)",
-              },
-            }}
-          />
+          {showControls && (
+            <Chip
+              label="APRÈS"
+              onClick={() => setShowAp(true)}
+              sx={{
+                position: "absolute",
+                top: 10,
+                right: 10,
+                backgroundColor: showAp
+                  ? "rgba(74, 101, 129, 1)"
+                  : "rgba(74, 101, 129, 0.6)",
+                color: "white",
+                fontWeight: "bold",
+                cursor: "pointer",
+                "&:hover": {
+                  backgroundColor: "rgba(74, 101, 129, 1)",
+                },
+              }}
+            />
+          )}
 
-          <Chip
-            label="AVANT"
-            onClick={() => setShowAp(false)}
-            sx={{
-              position: "absolute",
-              bottom: 20,
-              left: 20,
-              backgroundColor: !showAp
-                ? "rgba(200, 0, 0, 1)"
-                : "rgba(200, 0, 0, 0.6)",
-              color: "white",
-              fontWeight: "bold",
-              cursor: "pointer",
-              "&:hover": {
-                backgroundColor: "rgba(200, 0, 0, 1)",
-              },
-            }}
-          />
+          {showControls && (
+            <Chip
+              label="AVANT"
+              onClick={() => setShowAp(false)}
+              sx={{
+                position: "absolute",
+                bottom: 20,
+                left: 20,
+                backgroundColor: !showAp
+                  ? "rgba(200, 0, 0, 1)"
+                  : "rgba(200, 0, 0, 0.6)",
+                color: "white",
+                fontWeight: "bold",
+                cursor: "pointer",
+                "&:hover": {
+                  backgroundColor: "rgba(200, 0, 0, 1)",
+                },
+              }}
+            />
+          )}
         </div>
       </div>
     );
@@ -401,7 +411,7 @@ function RealisationBandeau({
       <table
         style={{
           width: "100%",
-          backgroundColor: "#807c73"
+          backgroundColor: "#807c73",
         }}
       >
         <tbody>

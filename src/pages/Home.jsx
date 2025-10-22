@@ -1,4 +1,5 @@
 import Realisations from "../components/Realisations.jsx";
+import BestofCarousel from "../components/BestofCarousel.jsx";
 import { useEffect, useState } from "react";
 
 function Home() {
@@ -57,7 +58,7 @@ function Home() {
               fontWeight: "400",
             }}
           >
-            Construction / Rénovation <br/> Eco-responsable
+            Construction / Rénovation <br /> Eco-responsable
           </h2>
 
           <div style={{ marginBottom: "2rem" }}>
@@ -160,9 +161,9 @@ function Home() {
               textAlign: "justify",
             }}
           >
-            Bienvenue chez Niddoo, <br/> Spécialistes de la
-            rénovation éco-responsable, nous offrons une expertise complète avec
-            maîtrise d'œuvre, plans d'architecte, garanties constructions et une
+            Bienvenue chez Niddoo, <br /> Spécialistes de la rénovation
+            éco-responsable, nous offrons une expertise complète avec maîtrise
+            d'œuvre, plans d'architecte, garanties constructions et une
             assistance à la vente. Avec Niddoo, transformez votre espace en un
             nid tout doux, alliant confort et durabilité !
           </p>
@@ -276,7 +277,7 @@ function Home() {
                   color: "#2C2C2C",
                   textTransform: "uppercase",
                   letterSpacing: "0.05em",
-              }}
+                }}
               >
                 MAITRISE D'OEUVRE
               </h2>
@@ -417,6 +418,21 @@ function Home() {
         </div>
 
         <Realisations />
+
+        <div style={{ marginTop: "40px", textAlign: "center" }}>
+          <h1 className="section-title">BEST OF</h1>
+          <div
+            style={{
+              width: "85px",
+              height: "3px",
+              backgroundColor: "#5C5C5C",
+              margin: "20px auto 40px auto",
+              borderRadius: "8px",
+            }}
+          ></div>
+        </div>
+
+        <BestofCarousel />
 
         <div
           className="modern-card footer-card"
